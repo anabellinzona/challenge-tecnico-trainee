@@ -2,22 +2,40 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface CommentPost {
+  id: number;
+  content: string;
+  created_at: string;
+  post: number;
+}
+
+
+export interface CategoryPost{
+  id: number;
+  name: string;
+}
+
 export interface BlogPost {
   id: number;
   title: string;
   content: string;
   created_at: string;
   updated_at: string;
+  comments: CommentPost[];
+  categories: CategoryPost[];
+  category_ids: number[];
 }
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class BlogService {
   private apiUrl = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) {}
 
+  //CRUD POST
   getPosts(): Observable<BlogPost[]> {
     return this.http.get<BlogPost[]>(`${this.apiUrl}/posts/`);
   }
@@ -36,6 +54,63 @@ export class BlogService {
 
   deletePost(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/posts/${id}/`);
+  }
+
+  //CRUD COMMENT
+  getComments(): Observable<CommentPost[]>{
+    return this.http.get<CommentPost[]>(`${this.apiUrl}/comments/`)
+  }
+
+  getComment(id: number): Observable<CommentPost> {
+    return this.http.get<CommentPost>(`${this.apiUrl}/comments/${id}/`);
+  }
+
+  createComment(post: Partial<CommentPost>): Observable<CommentPost> {
+    return this.http.post<CommentPost>(`${this.apiUrl}/comments/`, post);
+  }
+
+  updateComment(id: number, post: Partial<CommentPost>): Observable<CommentPost> {
+    return this.http.put<CommentPost>(`${this.apiUrl}/comments/${id}/`, post);
+  }
+
+  deleteComment(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/comments/${id}/`);
+  }
+
+  //CRUD CATEGORY
+  getCategories(): Observable<CategoryPost[]>{
+    return this.http.get<CategoryPost[]>(`${this.apiUrl}/categories/`)
+  }
+
+  getCategory(id: number): Observable<CategoryPost> {
+    return this.http.get<CategoryPost>(`${this.apiUrl}/categories/${id}/`);
+  }
+
+  createCategory(post: Partial<CategoryPost>): Observable<CategoryPost> {
+    return this.http.post<CategoryPost>(`${this.apiUrl}/categories/`, post);
+  }
+
+  updateCategory(id: number, post: Partial<CategoryPost>): Observable<CategoryPost> {
+    return this.http.put<CategoryPost>(`${this.apiUrl}/categories/${id}/`, post);
+  }
+
+  deleteCategory(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/categories/${id}/`);
+  }
+
+  //FILTER
+  getPostsFiltered(categoryId?: number, search?: string): Observable<BlogPost[]> {
+    let params: any = {};
+
+    if (categoryId) {
+      params.category = categoryId;
+    }
+
+    if (search) {
+      params.search = search;
+    }
+
+    return this.http.get<BlogPost[]>(`${this.apiUrl}/posts/`, { params });
   }
 }
 

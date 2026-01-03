@@ -1,7 +1,21 @@
 from django.db import models
 
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        verbose_name_plural = "categories"
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
 
 class BlogPost(models.Model):
+    categories = models.ManyToManyField(
+        Category,
+        related_name='posts',
+        blank=True
+    )
     title = models.CharField(max_length=200)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -15,6 +29,11 @@ class BlogPost(models.Model):
 
 
 class Comment(models.Model):
+    post = models.ForeignKey(
+        BlogPost,
+        related_name='comments',
+        on_delete=models.CASCADE
+    )
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -23,14 +42,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment: {self.content[:50]}"
-
-
-class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-
-    class Meta:
-        verbose_name_plural = "categories"
-        ordering = ['name']
-
-    def __str__(self):
-        return self.name
