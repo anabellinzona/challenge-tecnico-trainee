@@ -1,4 +1,5 @@
 <div class="blog-list">
+  <h1>My blog</h1>
   <div class="header-actions">
     <a routerLink="/posts/new" class="btn btn-primary">+ New Post</a>
   </div>
@@ -29,13 +30,16 @@
               Updated: {{ post.updated_at | date:'short' }}
             </span>
           </div>
+          
           <div class="post-actions">
             <button (click)="toggleExpand(post.id)" class="btn btn-sm btn-primary">
               {{ isExpanded(post.id) ? 'Collapse' : 'Open' }}
             </button>
             <button (click)="startEdit(post)" class="btn btn-sm btn-secondary">Edit</button>
             <button (click)="deletePost(post.id)" class="btn btn-sm btn-danger">Delete</button>
+            <button (click)="toggleComments(post.id)" class="btn btn-sm btn-primary">{{isCommentExpanded(post.id) ? 'Hide comments': 'Show comments'}}</button>
           </div>
+           <app-comment-list *ngIf="visibleCommentsPostId === post.id" [postId]="post.id"></app-comment-list>
         </div>
         
         <div *ngIf="editingPostId === post.id" class="edit-form">

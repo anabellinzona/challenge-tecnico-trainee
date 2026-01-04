@@ -1,0 +1,12 @@
+<div class="comment-component">
+    <div *ngIf="comments.length === 0">
+            <h4>No hay comentarios aún</h4>
+        </div>
+    <div *ngFor="let comment of comments">
+        <div>
+            <h4 class="comment-container">
+                {{comment.content}}
+            </h4>
+        </div>
+    </div>
+</div>

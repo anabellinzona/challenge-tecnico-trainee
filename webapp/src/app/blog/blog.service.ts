@@ -61,8 +61,8 @@ export class BlogService {
     return this.http.get<CommentPost[]>(`${this.apiUrl}/comments/`)
   }
 
-  getComment(id: number): Observable<CommentPost> {
-    return this.http.get<CommentPost>(`${this.apiUrl}/comments/${id}/`);
+  getComment(id: number): Observable<CommentPost[]> {
+    return this.http.get<CommentPost[]>(`${this.apiUrl}/comments/?post=${id}`);
   }
 
   createComment(post: Partial<CommentPost>): Observable<CommentPost> {

@@ -3,11 +3,17 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BlogService, BlogPost } from '../blog.service';
+import { CommentListComponent } from "../comment-list/comment-list.component";
 
 @Component({
   selector: 'app-blog-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    CommentListComponent
+],
   templateUrl: './blog-list.component.html',
   styleUrls: ['./blog-list.component.css']
 })
@@ -18,6 +24,8 @@ export class BlogListComponent implements OnInit {
   editingPostId: number | null = null;
   editingPost: Partial<BlogPost> = {};
   expandedPostIds: Set<number> = new Set();
+  visibleCommentsPostId: number | null = null;
+  expandedPostId: Set<number> = new Set();
 
   constructor(private blogService: BlogService) {}
 
@@ -46,7 +54,21 @@ export class BlogListComponent implements OnInit {
     }
   }
 
+
+  toggleComments(postId: number) {
+    if (this.visibleCommentsPostId === postId) {
+      this.visibleCommentsPostId = null; 
+    } else {
+      this.visibleCommentsPostId = postId; 
+    }
+  }
+
+
   isExpanded(id: number): boolean {
+    return this.expandedPostIds.has(id);
+  }
+
+  isCommentExpanded(id: number): boolean {
     return this.expandedPostIds.has(id);
   }
 
@@ -95,18 +117,30 @@ export class BlogListComponent implements OnInit {
     }
   }
 
+  // //COMMENT
+  // loadComment(): void {
+  //   this.blogService.getComments().subscribe({
+  //     next: (comments) => {
+  //       this.comments = comments;
+  //       this.filterPosts();
+  //     },
+  //     error: (error) => {
+  //       console.error('Error loading comments:', error);
+  //       alert('Error loading comments. Please try again.');
+  //     }
+  //   });
+  // }
+
+      //FILTER
   filterPosts(): void {
     this.cancelEdit();
     this.collapseAll();
-    if (!this.searchTerm.trim()) {
-      this.filteredPosts = [...this.posts];
-    } else {
-      const term = this.searchTerm.toLowerCase();
-      this.filteredPosts = this.posts.filter(post => 
-        post.title.toLowerCase().includes(term) || 
-        post.content.toLowerCase().includes(term)
-      );
-    }
+
+    this.blogService
+      .getPostsFiltered(undefined, this.searchTerm)
+      .subscribe(posts => {
+        this.filteredPosts = posts
+      })
   }
 }
 

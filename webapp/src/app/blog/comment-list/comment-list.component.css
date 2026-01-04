@@ -1,0 +1,24 @@
+.comment-component{
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    height: fit-content;
+    max-height: 150px;
+    width: 50%;
+    padding: 15px;
+    gap: 10px;
+    border: 2px solid #e0e0e0;
+    justify-content: center;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+.comment-container{
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border: 2px solid #e0e0e0;
+    height: fit-content;
+    width: fit-content;
+    padding: 15px;
+}
