@@ -1,18 +1,4 @@
 <div class="categories-container-properties">
-    <div class="edit-form">
-
-        <form (ngSubmit)="saveCategory()" class="form-properties">
-            <div>
-                <input type="text" id="edit-content-{{category.id}}" [(ngModel)]="editingCategory.name"
-                    name="edit-content-{{category.name}}" required class="input-properties">
-            </div>
-            <div class="buttons-properties">
-                <button type="submit" class="button-save-properties">Save</button>
-                <button type="button" (click)="cancelEdit()" class="button-cancel-properties">Cancel</button>
-            </div>
-        </form>
-
-    </div>
     <div *ngIf="categories.length === 0">
         <h4>Don´t categories yet</h4>
     </div>
@@ -20,40 +6,5 @@
         <h4 class="cateogry-container">
             {{category.name}}
         </h4>
-        <!-- <div *ngIf="editingCommentId !== category.id"> -->
-
-        <!-- </div> -->
-
-        <!-- <div *ngIf="editingCommentId !== category.id">
-            <div class="button-container">
-                <button (click)="startEdit(category)" class="button-edit-properties" >
-                    Edit
-                </button>
-
-                <button (click)="deleteComment(category.id)" class="button-delete-properties">
-                    Delete
-                </button>
-            </div>
-        </div> -->
     </div>
-    <!-- <h4 *ngIf="newComment == true">
-        <form (ngSubmit)="saveComment()" class="form-properties">
-            <div>
-                    <label for="edit-title-{{comment.id}}">Comment</label> 
-                <input 
-                    type="text" 
-                    id="comment"
-                    [(ngModel)]="comment.content" 
-                    name="comment"
-                    required
-                    class="input-properties">
-            </div>
-            <div class="buttons-properties">
-                <button type="submit" class="button-save-properties">Save</button>
-                <button type="button" (click)="cancelEdit()" class="button-cancel-properties">Cancel</button>
-            </div>
-        </form>
-    </h4>
-    <button (click)="startAdd()" class="button-comment-properties">+ Add new comment</button> -->
-
 </div>

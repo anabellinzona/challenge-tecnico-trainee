@@ -1,0 +1,43 @@
+<div>
+    <div class="header-actions">
+        <a routerLink="/posts">Back to List</a>
+    </div>
+    <button class="btn" (click)="startAdd()">+ New category</button>
+    <div class="categories-container-properties">
+        <h1>
+            Categories
+        </h1>
+        <div *ngFor="let category of categories" class="category-container-properties">
+            <div *ngIf="editingCategorytId !== category.id" class="category-properties">
+                <h4>{{category.name}}</h4>
+            </div>
+            <div *ngIf="editingCategorytId !== category.id" class="buttons-properties">
+                <button class="edit-button-properties" (click)="startEdit(category)">Edit</button>
+                <button (click)="deleteCategory(category.id)" class="delete-button-properties">Delete</button>
+            </div>
+            <div *ngIf="editingCategorytId === category.id" class="category-properties">
+                <form (submit)="editCategory()">
+                    <input type="text" id="edit-content-{{category.id}}" [(ngModel)]="editingCategory.name"
+                        name="edit-content-{{category.id}}" required class="input-properties">
+                    <div class="buttons-properties">
+                        <button type="submit" class="button-save-properties">Save</button>
+                        <button type="button" (click)="cancelEdit()" class="button-cancel-properties">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <h4 *ngIf="newCategory == true">
+            New category
+            <form (ngSubmit)="saveCategory()" class="form-properties">
+                <div>
+                    <input type="text" id="category" [(ngModel)]="category.name" name="category" required
+                        class="input-properties">
+                </div>
+                <div class="buttons-post-properties">
+                    <button type="submit" class="button-save-properties">Save</button>
+                    <button type="button" (click)="cancelEdit()" class="button-cancel-properties">Cancel</button>
+                </div>
+            </form>
+        </h4>
+    </div>
+</div>
