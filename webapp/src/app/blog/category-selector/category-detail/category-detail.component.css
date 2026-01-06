@@ -3,7 +3,6 @@
 }
 
 .categories-container-properties {
-    flex-direction: row;
     align-self: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     border-radius: 20px;
@@ -14,13 +13,20 @@
     margin: 10px;
 }
 
+.categories-container-properties, .buttons-properties, .buttons-post-properties {
+    flex-direction: row;
+}
+
 .category-properties {
-    width: fit-content;
-    height: fit-content;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border: 1px solid gray;
+}
+
+.category-properties, .edit-button-properties, .delete-button-properties{
+    width: fit-content;
+    height: fit-content;
 }
 
 .category-container-properties,
@@ -38,21 +44,21 @@
 }
 
 .buttons-properties, .buttons-post-properties {
-    flex-direction: row;
     gap: 10px;
     margin-top: 10px;
 }
 
 .edit-button-properties,
 .delete-button-properties {
-    width: fit-content;
-    height: fit-content;
     cursor: pointer;
 }
 
 .edit-button-properties {
     border: 1px solid green;
     color: green;
+}
+
+.edit-button-properties, .delete-button-properties:hover {
     background-color: white;
 }
 
@@ -62,16 +68,18 @@
 }
 
 .delete-button-properties {
-    color: white;
     border: none;
     background-color: red;
     transition: all 0.5s ease-in-out;
 }
 
 .delete-button-properties:hover {
-    background-color: white;
     color: red;
     border: 1px solid red;
+}
+
+.btn, .delete-button-properties{
+    color: white;
 }
 
 .btn {
@@ -84,7 +92,6 @@
     font-weight: 500;
     transition: all 0.2s ease;
     background: #007bff;
-    color: white;
     font-size: 20px;
 }
 

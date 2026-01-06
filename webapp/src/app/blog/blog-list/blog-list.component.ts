@@ -29,7 +29,6 @@ export class BlogListComponent implements OnInit {
   expandedPostIds: Set<number> = new Set();
   visibleCommentsPostId: number | null = null;
   expandedPostId: Set<number> = new Set();
-  commentsShow: boolean = false;
   visibleCategoriesPostId: number | null = null;
 
   constructor(private blogService: BlogService) {}
@@ -79,10 +78,6 @@ toggleCategories(postId: number) {
 
   isExpanded(id: number): boolean {
     return this.expandedPostIds.has(id);
-  }
-
-  isCommentExpanded(id: number): void {
-    this.commentsShow = true;
   }
 
   startEdit(post: BlogPost): void {

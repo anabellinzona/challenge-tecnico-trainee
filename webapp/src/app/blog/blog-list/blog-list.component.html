@@ -38,8 +38,8 @@
             </button>
             <button (click)="startEdit(post)" class="btn btn-sm btn-secondary">Edit</button>
             <button (click)="deletePost(post.id)" class="btn btn-sm btn-danger">Delete</button>
-            <button (click)="toggleComments(post.id)" class="btn btn-sm btn-primary">{{commentsShow === true ? 'Hide comments': 'Show comments'}}</button>
-            <button type="button" (click)="toggleCategories(post.id); $event.stopPropagation()" class="btn btn-sm btn-primary"> Show categories </button>
+            <button (click)="toggleComments(post.id)" class="btn btn-sm btn-primary">{{visibleCommentsPostId === post.id ? 'Hide comments': 'Show comments'}}</button>
+            <button type="button" (click)="toggleCategories(post.id); $event.stopPropagation()" class="btn btn-sm btn-primary">{{visibleCategoriesPostId === post.id ? 'Hide categories': 'Show categories'}}</button>
 
           </div>
            <app-comment-list *ngIf="visibleCommentsPostId === post.id" [postId]="post.id"></app-comment-list>
