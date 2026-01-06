@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 export interface CommentPost {
   id: number;
   content: string;
+  // author: number;
   created_at: string;
   post: number;
 }
@@ -13,6 +14,7 @@ export interface CommentPost {
 export interface CategoryPost{
   id: number;
   name: string;
+  // post: number;
 }
 
 export interface BlogPost {
@@ -65,8 +67,8 @@ export class BlogService {
     return this.http.get<CommentPost[]>(`${this.apiUrl}/comments/?post=${id}`);
   }
 
-  createComment(post: Partial<CommentPost>): Observable<CommentPost> {
-    return this.http.post<CommentPost>(`${this.apiUrl}/comments/`, post);
+  createComment(comment: Partial<CommentPost>): Observable<CommentPost> {
+    return this.http.post<CommentPost>(`${this.apiUrl}/comments/`, comment);
   }
 
   updateComment(id: number, post: Partial<CommentPost>): Observable<CommentPost> {
@@ -86,8 +88,8 @@ export class BlogService {
     return this.http.get<CategoryPost>(`${this.apiUrl}/categories/${id}/`);
   }
 
-  createCategory(post: Partial<CategoryPost>): Observable<CategoryPost> {
-    return this.http.post<CategoryPost>(`${this.apiUrl}/categories/`, post);
+  createCategory(category: Partial<CategoryPost>): Observable<CategoryPost> {
+    return this.http.post<CategoryPost>(`${this.apiUrl}/categories/`, category);
   }
 
   updateCategory(id: number, post: Partial<CategoryPost>): Observable<CategoryPost> {

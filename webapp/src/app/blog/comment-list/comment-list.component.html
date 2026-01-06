@@ -1,12 +1,64 @@
-<div class="comment-component">
+<div class="comments-container-properties">
     <div *ngIf="comments.length === 0">
-            <h4>No hay comentarios aún</h4>
+            <h4>Don´t comments yet</h4>
+    </div>
+    <div *ngFor="let comment of comments" class="comment-container-properties">
+        <div *ngIf="editingCommentId === comment.id" class="edit-form">
+            <h4>
+                <form (ngSubmit)="editComment()" class="form-properties">
+                    <div>
+                        <!-- <label for="edit-title-{{comment.id}}">Comment</label> -->
+                        <textarea 
+                            type="text" 
+                            id="edit-content-{{comment.id}}"
+                            [(ngModel)]="editingComment.content" 
+                            name="edit-content-{{comment.id}}"
+                            required
+                            class="input-properties"></textarea>
+                    </div>
+                    <div class="buttons-properties">
+                        <button type="submit" class="button-save-properties">Save</button>
+                        <button type="button" (click)="cancelEdit()" class="button-cancel-properties">Cancel</button>
+                    </div>
+                </form>
+            </h4>
         </div>
-    <div *ngFor="let comment of comments">
-        <div>
+        <div *ngIf="editingCommentId !== comment.id">
             <h4 class="comment-container">
                 {{comment.content}}
             </h4>
         </div>
+
+        <div *ngIf="editingCommentId !== comment.id">
+            <div class="button-container">
+                <button (click)="startEdit(comment)" class="button-edit-properties" >
+                    Edit
+                </button>
+
+                <button (click)="deleteComment(comment.id)" class="button-delete-properties">
+                    Delete
+                </button>
+            </div>
+        </div>
     </div>
+     <h4 *ngIf="newComment == true">
+        <form (ngSubmit)="saveComment()" class="form-properties">
+            <div>
+                <!-- <label for="edit-title-{{comment.id}}">Comment</label> -->
+                <input 
+                    type="text" 
+                    id="comment"
+                    [(ngModel)]="comment.content" 
+                    name="comment"
+                    required
+                    class="input-properties">
+            </div>
+            <div class="buttons-properties">
+                <button type="submit" class="button-save-properties">Save</button>
+                <button type="button" (click)="cancelEdit()" class="button-cancel-properties">Cancel</button>
+            </div>
+        </form>
+    </h4>
+    <button (click)="startAdd()" class="button-comment-properties">+ Add new comment</button>
+
 </div>

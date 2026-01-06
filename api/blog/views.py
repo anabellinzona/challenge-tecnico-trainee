@@ -31,6 +31,7 @@ class BlogPostViewSet(viewsets.ModelViewSet):
     
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
+    # permission_classes = [IsOwner]
     def get_queryset(self):
         queryset = Comment.objects.all()
         post_id = self.request.query_params.get('post')

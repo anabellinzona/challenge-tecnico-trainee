@@ -2,6 +2,7 @@
   <h1>My blog</h1>
   <div class="header-actions">
     <a routerLink="/posts/new" class="btn btn-primary">+ New Post</a>
+    <a routerLink="/category/new" class="btn btn-primary">+ New cateogry</a>
   </div>
   
   <div class="filters">
@@ -37,9 +38,12 @@
             </button>
             <button (click)="startEdit(post)" class="btn btn-sm btn-secondary">Edit</button>
             <button (click)="deletePost(post.id)" class="btn btn-sm btn-danger">Delete</button>
-            <button (click)="toggleComments(post.id)" class="btn btn-sm btn-primary">{{isCommentExpanded(post.id) ? 'Hide comments': 'Show comments'}}</button>
+            <button (click)="toggleComments(post.id)" class="btn btn-sm btn-primary">{{commentsShow === true ? 'Hide comments': 'Show comments'}}</button>
+            <button type="button" (click)="toggleCategories(post.id); $event.stopPropagation()" class="btn btn-sm btn-primary"> Show categories </button>
+
           </div>
            <app-comment-list *ngIf="visibleCommentsPostId === post.id" [postId]="post.id"></app-comment-list>
+           <app-cateogry-selector *ngIf="visibleCategoriesPostId === post.id" [postId]="post.id"></app-cateogry-selector>
         </div>
         
         <div *ngIf="editingPostId === post.id" class="edit-form">
@@ -64,6 +68,29 @@
                 required
                 class="form-control"></textarea>
             </div>
+            <div class="form-group">
+            <label>Categories</label>
+
+            <div class="checkbox-group">
+              <div *ngFor="let category of post.categories" class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  [id]="'cat-' + category.id"
+                  [checked]="isCategorySelected(category.id)"
+                  (change)="onCategoryChange($event, category.id)"
+                />
+
+                <label
+                  class="form-check-label"
+                  [for]="'cat-' + category.id"
+                >
+                  {{ category.name }}
+                </label>
+              </div>
+            </div>
+          </div>
+
             <div class="form-actions">
               <button type="submit" class="btn btn-sm btn-primary">Save</button>
               <button type="button" (click)="cancelEdit()" class="btn btn-sm">Cancel</button>
@@ -74,3 +101,4 @@
     </div>
   </div>
 </div>
+

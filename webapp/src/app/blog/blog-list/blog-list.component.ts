@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { BlogService, BlogPost } from '../blog.service';
+import { BlogService, BlogPost, CategoryPost } from '../blog.service';
 import { CommentListComponent } from "../comment-list/comment-list.component";
+import { CategorySelectorComponent } from "../category-selector/category-selector.component";
 
 @Component({
   selector: 'app-blog-list',
@@ -12,13 +13,15 @@ import { CommentListComponent } from "../comment-list/comment-list.component";
     CommonModule,
     RouterModule,
     FormsModule,
-    CommentListComponent
+    CommentListComponent,
+    CategorySelectorComponent
 ],
   templateUrl: './blog-list.component.html',
   styleUrls: ['./blog-list.component.css']
 })
 export class BlogListComponent implements OnInit {
   posts: BlogPost[] = [];
+  categories: CategoryPost[] = [];
   filteredPosts: BlogPost[] = [];
   searchTerm: string = '';
   editingPostId: number | null = null;
@@ -26,6 +29,8 @@ export class BlogListComponent implements OnInit {
   expandedPostIds: Set<number> = new Set();
   visibleCommentsPostId: number | null = null;
   expandedPostId: Set<number> = new Set();
+  commentsShow: boolean = false;
+  visibleCategoriesPostId: number | null = null;
 
   constructor(private blogService: BlogService) {}
 
@@ -54,7 +59,6 @@ export class BlogListComponent implements OnInit {
     }
   }
 
-
   toggleComments(postId: number) {
     if (this.visibleCommentsPostId === postId) {
       this.visibleCommentsPostId = null; 
@@ -63,19 +67,76 @@ export class BlogListComponent implements OnInit {
     }
   }
 
+toggleCategories(postId: number) {
+  console.log('toggle categories', postId);
+  if (this.visibleCategoriesPostId === postId) {
+    this.visibleCategoriesPostId = null;
+  } else {
+    this.visibleCategoriesPostId = postId;
+  }
+}
+
 
   isExpanded(id: number): boolean {
     return this.expandedPostIds.has(id);
   }
 
-  isCommentExpanded(id: number): boolean {
-    return this.expandedPostIds.has(id);
+  isCommentExpanded(id: number): void {
+    this.commentsShow = true;
   }
 
   startEdit(post: BlogPost): void {
     this.editingPostId = post.id;
     this.editingPost = { ...post };
   }
+
+  loadCategories(): void {
+    this.blogService.getCategories().subscribe({
+      next: (data) => {
+        this.categories = data;
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  isCategorySelected(categoryId: number): boolean {
+    return this.editingPost?.category_ids?.includes(categoryId) ?? false;
+  }
+
+  onCategoryChange(event: Event, categoryId: number): void {
+    const checkbox = event.target as HTMLInputElement;
+
+    if (!this.editingPost.category_ids) {
+      this.editingPost.category_ids = [];
+    }
+
+    if (checkbox.checked) {
+      this.editingPost.category_ids.push(categoryId);
+    } else {
+      this.editingPost.category_ids = this.editingPost.category_ids.filter(
+        id => id !== categoryId
+      );
+    }
+  }
+
+  // updatePost(): void {
+  //   const payload = {
+  //     title: this.editingPost.title,
+  //     content: this.editingPost.content,
+  //     category_ids: this.editingPost.category_ids
+  //   };
+
+  //   this.blogService.updatePost(this.editingPost.id, payload).subscribe({
+  //     next: () => {
+  //       alert('Post updated successfully');
+  //       this.router.navigate(['/posts', this.editingPost.id]);
+  //     },
+  //     error: (err) => {
+  //       console.error(err);
+  //       alert('Error updating post');
+  //     }
+  //   });
+  // }
 
   saveEdit(): void {
     if (this.editingPostId && this.editingPost.id) {
@@ -117,21 +178,7 @@ export class BlogListComponent implements OnInit {
     }
   }
 
-  // //COMMENT
-  // loadComment(): void {
-  //   this.blogService.getComments().subscribe({
-  //     next: (comments) => {
-  //       this.comments = comments;
-  //       this.filterPosts();
-  //     },
-  //     error: (error) => {
-  //       console.error('Error loading comments:', error);
-  //       alert('Error loading comments. Please try again.');
-  //     }
-  //   });
-  // }
-
-      //FILTER
+  //FILTER
   filterPosts(): void {
     this.cancelEdit();
     this.collapseAll();

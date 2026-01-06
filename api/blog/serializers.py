@@ -11,6 +11,14 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'name']
 
+# class CommentSerializer(serializers.ModelSerializer):
+#     author_username = serializers.CharField(source='author.username', read_only=True)
+
+#     class Meta:
+#         model = Comment
+#         fields = ['id', 'content', 'created_at', 'post', 'author', 'author_username']
+
+
 class BlogPostSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     categories = CategorySerializer(many=True, read_only=True)

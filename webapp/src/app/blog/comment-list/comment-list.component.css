@@ -1,17 +1,15 @@
-.comment-component{
+.comments-container-properties{
     display: flex;
     flex-direction: column;
     border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    height: fit-content;
-    max-height: 150px;
     width: 50%;
-    padding: 15px;
     gap: 10px;
     border: 2px solid #e0e0e0;
     justify-content: center;
+    margin-top: 20px;  
     overflow-y: auto;
-    margin-top: 20px;
+    padding: 15px;
 }
 
 .comment-container{
@@ -21,4 +19,76 @@
     height: fit-content;
     width: fit-content;
     padding: 15px;
+}
+
+.button-edit-properties, .button-delete-properties, .button-save-properties, .button-cancel-properties, .button-comment-properties{
+    width: fit-content;
+    height: fit-content;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.button-save-properties{
+    background-color: green;
+}
+
+.button-cancel-properties{
+    background-color: #dc3545;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.form-properties{
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    gap: 20px;
+}
+
+.input-properties{
+    border-radius: 10px;
+    width: fit-content;
+    padding: 10px;
+    border: 1px solid blue;
+}
+
+.buttons-properties{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.comment-container-properties{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.button-edit-properties{
+    border: 2px solid #007bff;
+    color: #007bff;
+    transform: scaleX(150px);
+}
+
+.button-delete-properties, .button-edit-properties{
+     background: white;
+}
+
+.button-delete-properties{
+    border: 2px solid #dc3545;
+    color: #dc3545;
+}
+
+.button-comment-properties{
+    background-color: #007bff;
 }
