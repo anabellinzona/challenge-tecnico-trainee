@@ -1,5 +1,4 @@
 .comments-container-properties{
-    display: flex;
     flex-direction: column;
     border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -12,23 +11,28 @@
     padding: 15px;
 }
 
+.comments-container-properties, .button-container, .form-properties, .buttons-properties, .comment-container-properties{
+    display: flex;
+}
+
 .comment-container{
     border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     border: 2px solid #e0e0e0;
-    height: fit-content;
-    width: fit-content;
     padding: 15px;
 }
 
 .button-edit-properties, .button-delete-properties, .button-save-properties, .button-cancel-properties, .button-comment-properties{
-    width: fit-content;
-    height: fit-content;
     padding: 10px 15px;
     color: white;
     border-radius: 15px;
     border: none;
     cursor: pointer;
+}
+
+.button-edit-properties, .button-delete-properties, .button-save-properties, .button-cancel-properties, .button-comment-properties, .comment-container{
+    width: fit-content;
+    height: fit-content;
 }
 
 .button-save-properties{
@@ -40,19 +44,17 @@
 }
 
 .button-container{
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
     margin-top: 10px;
 }
 
 .form-properties{
-    display: flex;
-    flex-direction: row;
     border-radius: 10px;
     width: fit-content;
     height: fit-content;
-    gap: 20px;
+}
+
+.form-properties, .comment-container-properties, .buttons-properties, .button-container{
+    flex-direction: row;
 }
 
 .input-properties{
@@ -62,15 +64,11 @@
     border: 1px solid blue;
 }
 
-.buttons-properties{
-    display: flex;
-    flex-direction: row;
+.buttons-properties, .button-container{
     gap: 10px;
 }
 
-.comment-container-properties{
-    display: flex;
-    flex-direction: row;
+.comment-container-properties, .form-properties{
     gap: 20px;
 }
 
@@ -81,7 +79,7 @@
 }
 
 .button-delete-properties, .button-edit-properties{
-     background: white;
+    background-color: white;
 }
 
 .button-delete-properties{

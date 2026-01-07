@@ -6,8 +6,6 @@
     align-self: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     border-radius: 20px;
-    width: fit-content;
-    height: fit-content;
     padding: 50px;
     justify-self: center;
     margin: 10px;
@@ -24,7 +22,7 @@
     border: 1px solid gray;
 }
 
-.category-properties, .edit-button-properties, .delete-button-properties{
+.category-properties, .edit-button-properties, .delete-button-properties, .categories-container-properties, .button-save-properties, .button-cancel-properties {
     width: fit-content;
     height: fit-content;
 }
@@ -104,8 +102,6 @@
 }
 
 .button-save-properties, .button-cancel-properties{
-    width: fit-content;
-    height: fit-content;
     padding: 10px 15px;
     color: white;
     border-radius: 15px;
