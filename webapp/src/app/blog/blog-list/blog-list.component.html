@@ -44,6 +44,11 @@
           </div>
            <app-comment-list *ngIf="visibleCommentsPostId === post.id" [postId]="post.id"></app-comment-list>
            <app-cateogry-selector *ngIf="visibleCategoriesPostId === post.id" [postId]="post.id"></app-cateogry-selector>
+
+           <div *ngIf="visibleCommentsPostId != post.id && visibleCategoriesPostId !== post.id && isExpanded(post.id)">
+            <app-comment-list [postId]="post.id"></app-comment-list>
+            <app-cateogry-selector [postId]="post.id"></app-cateogry-selector>
+           </div>
         </div>
         
         <div *ngIf="editingPostId === post.id" class="edit-form">
