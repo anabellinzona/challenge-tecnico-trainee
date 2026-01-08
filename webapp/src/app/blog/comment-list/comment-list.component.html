@@ -7,7 +7,6 @@
             <h4>
                 <form (ngSubmit)="editComment()" class="form-properties">
                     <div>
-                        <!-- <label for="edit-title-{{comment.id}}">Comment</label> -->
                         <textarea 
                             type="text" 
                             id="edit-content-{{comment.id}}"
@@ -44,7 +43,6 @@
      <h4 *ngIf="newComment == true">
         <form (ngSubmit)="saveComment()" class="form-properties">
             <div>
-                <!-- <label for="edit-title-{{comment.id}}">Comment</label> -->
                 <input 
                     type="text" 
                     id="comment"
