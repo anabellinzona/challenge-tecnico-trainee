@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/enviroment';
+import { environment } from '../../environment/enviroment';
 
 export interface CommentPost {
   id: number;
@@ -13,7 +13,6 @@ export interface CommentPost {
 export interface CategoryPost{
   id: number;
   name: string;
-  // post: number;
 }
 
 export interface BlogPost {
