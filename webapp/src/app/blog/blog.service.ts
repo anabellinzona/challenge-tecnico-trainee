@@ -7,6 +7,7 @@ export interface CommentPost {
   id: number;
   content: string;
   created_at: string;
+  post: number;
 }
 
 
