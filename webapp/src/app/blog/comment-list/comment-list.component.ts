@@ -103,7 +103,7 @@ export class CommentListComponent implements OnInit {
     this.blogService.createComment(this.comment).subscribe({
       next: (newComment) => {
         alert('Comment created successfully');
-        this.router.navigate(['/posts']);
+        this.loadComments();
       },
       error: (error) => {
         console.error('Error creating comment:', error);
