@@ -114,25 +114,6 @@ toggleCategories(postId: number) {
     }
   }
 
-  // updatePost(): void {
-  //   const payload = {
-  //     title: this.editingPost.title,
-  //     content: this.editingPost.content,
-  //     category_ids: this.editingPost.category_ids
-  //   };
-
-  //   this.blogService.updatePost(this.editingPost.id, payload).subscribe({
-  //     next: () => {
-  //       alert('Post updated successfully');
-  //       this.router.navigate(['/posts', this.editingPost.id]);
-  //     },
-  //     error: (err) => {
-  //       console.error(err);
-  //       alert('Error updating post');
-  //     }
-  //   });
-  // }
-
   saveEdit(): void {
     if (this.editingPostId && this.editingPost.id) {
       this.blogService.updatePost(this.editingPostId, this.editingPost).subscribe({
