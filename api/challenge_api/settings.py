@@ -92,12 +92,17 @@ REST_FRAMEWORK = {
     ],
 }
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
-    "https://challenge-tecnico-trainee-q2qasslot-anabellinzonas-projects.vercel.app",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:4200",
+#     "https://challenge-tecnico-trainee-q2qasslot-anabellinzonas-projects.vercel.app",
+# ]
 
+# CORS_ALLOW_CREDENTIALS = True
+
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
 
 CORS_ALLOW_HEADERS = [
     'accept',
